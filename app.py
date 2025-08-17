@@ -286,7 +286,8 @@ def extract_features(url: str):
 # ========================= PART 3: Main App =========================
 def main():
     st.set_page_config(page_title="Phishing Detector", page_icon="🕵️", layout="centered")
-    add_logo("Logo.png", height=60)
+    logo_path = os.path.join(os.path.dirname(__file__), "Logo.png")
+    add_logo(logo_path, height=60)
     st.title("Phishing Website Detector")
     st.write("AI-powered URL analysis for phishing detection.")
     
@@ -436,6 +437,7 @@ def main():
 # -------------------- Run App --------------------
 if __name__ == "__main__":
     main()
+
 
 
 
