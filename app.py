@@ -262,7 +262,7 @@ def main():
     st.set_page_config(page_title="Phishing Detector", page_icon="🕵️", layout="centered")
     st.title("Phishing Website Detector")
     st.write("AI-powered URL analysis for phishing detection.")
-     add_logo("Logo.png", height=60)
+    add_logo("Logo.png", height=60)
 
     model = load_model()
     lottie_success = load_lottie_file("success.json")
@@ -432,6 +432,7 @@ def main():
 # -------------------- Run App --------------------
 if __name__ == "__main__":
     main()
+
 
 
 
