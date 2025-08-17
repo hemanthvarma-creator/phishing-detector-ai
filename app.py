@@ -93,11 +93,21 @@ def get_html_content(url: str):
         return response.text
     except Exception:
         return None
-def add_logo(logo_path: str, height: int = 60):
-    """Read and encode logo to place top-left"""
+def add_logo(logo_filename: str, height: int = 60):
+    """Place logo top-left in Streamlit app"""
+    # Get absolute path
+    logo_path = os.path.join(os.path.dirname(__file__), logo_filename)
+    
+    if not os.path.exists(logo_path):
+        st.error(f"Logo file not found at {logo_path}")
+        return
+    
+    # Read and encode
     with open(logo_path, "rb") as f:
         img_data = f.read()
     encoded = base64.b64encode(img_data).decode()
+
+    # Inject HTML + CSS
     st.markdown(
         f"""
         <style>
@@ -112,7 +122,7 @@ def add_logo(logo_path: str, height: int = 60):
         }}
         </style>
         <div class="logo-container">
-            <img src="data:image/png;base64,{encoded}" alt="NetHook Logo">
+            <img src="data:image/png;base64,{encoded}" alt="Logo">
         </div>
         """,
         unsafe_allow_html=True
@@ -286,7 +296,7 @@ def extract_features(url: str):
 # ========================= PART 3: Main App =========================
 def main():
     st.set_page_config(page_title="Phishing Detector", page_icon="🕵️", layout="centered")
-    logo_path = os.path.join(os.path.dirname(__file__), "Logo.png")
+    
     add_logo(logo_path, height=60)
     st.title("Phishing Website Detector")
     st.write("AI-powered URL analysis for phishing detection.")
@@ -437,6 +447,7 @@ def main():
 # -------------------- Run App --------------------
 if __name__ == "__main__":
     main()
+
 
 
 
