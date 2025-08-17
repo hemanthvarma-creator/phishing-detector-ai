@@ -14,6 +14,7 @@ import numpy as np
 import os
 import json
 import time
+import base64
 from typing import Tuple
 
 
@@ -435,6 +436,7 @@ def main():
 # -------------------- Run App --------------------
 if __name__ == "__main__":
     main()
+
 
 
 
