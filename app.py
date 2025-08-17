@@ -300,6 +300,32 @@ def main():
                 for detail in details:
                     st.write(detail)
 
+    def add_logo(logo_path: str, height: int = 60):
+    """Read and encode logo to place top-left"""
+    with open(logo_path, "rb") as f:
+        img_data = f.read()
+    encoded = base64.b64encode(img_data).decode()
+    st.markdown(
+        f"""
+        <style>
+        .logo-container {{
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            z-index: 999;
+        }}
+        .logo-container img {{
+            height: {height}px;
+        }}
+        </style>
+        <div class="logo-container">
+            <img src="data:image/png;base64,{encoded}" alt="NetHook Logo">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
             # 📌 Footer inside main()
     st.markdown(
         """
@@ -405,3 +431,4 @@ def main():
 # -------------------- Run App --------------------
 if __name__ == "__main__":
     main()
+
